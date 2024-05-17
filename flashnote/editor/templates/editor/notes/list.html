@@ -5,13 +5,17 @@
 
 {% block content %}
     <h1>Editor</h1>
-    <div class="container">
-        {% for note_form, question_form in notes_questions_forms %}
-            {% if question_form %}
-                <div class="question">{{ question_form.as_p }}</div>
-            {% endif %}
-            <div class="note">{{ note_form.as_p }}</div>
+    <form class="container" action="{% url 'editor:notes_questions_list' %}" method="post">
+        <input class="" type="submit" value="save">
+        {% csrf_token %}
+        {{ questions_formset.management_form }}
+        {% for form in questions_formset %}
+            <div class="question">{{ form.as_p }}</div>
         {% endfor %}
-    </div>
+        {{ notes_formset.management_form }}
+        {% for form in notes_formset %}
+            <div class="note">{{ form.as_p }}</div>
+        {% endfor %}
+    </form>
     <script src="{% static 'scripts/main.js' %}"></script>
 {% endblock %}
