@@ -1,4 +1,5 @@
 {% extends "editor/base.html" %}
+{% load static %}
 
 {% block title %}Editor{% endblock %}
 
@@ -12,4 +13,5 @@
             <div class="note">{{ note_form.as_p }}</div>
         {% endfor %}
     </div>
+    <script src="{% static 'scripts/main.js' %}"></script>
 {% endblock %}
