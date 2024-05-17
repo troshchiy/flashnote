@@ -1,0 +1,15 @@
+{% extends "editor/base.html" %}
+
+{% block title %}Editor{% endblock %}
+
+{% block content %}
+    <h1>Editor</h1>
+    <div class="container">
+        {% for note, question in notes_questions %}
+            {% if question %}
+                <p class="question">{{ question.text }}</p>
+            {% endif %}
+            <p class="note">{{ note.text }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}
