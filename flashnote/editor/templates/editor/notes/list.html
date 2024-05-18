@@ -5,16 +5,16 @@
 
 {% block content %}
     <h1>Editor</h1>
-    <form class="container" action="{% url 'editor:notes_questions_list' %}" method="post">
-        <input class="" type="submit" value="save">
+    <input type="submit" value="save" form="notes_form">
+    <form id="notes_form" class="container" action="{% url 'editor:notes_list' %}" method="post">
         {% csrf_token %}
-        {{ questions_formset.management_form }}
-        {% for form in questions_formset %}
-            <div class="question">{{ form.as_p }}</div>
-        {% endfor %}
         {{ notes_formset.management_form }}
         {% for form in notes_formset %}
-            <div class="note">{{ form.as_p }}</div>
+            <div class="question" style="{% if not form.question.value %}display: none;{% endif %}">{{ form.question }}</div>
+            <div class="note">{{ form.text }}</div>
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
         {% endfor %}
     </form>
     <script src="{% static 'scripts/main.js' %}"></script>

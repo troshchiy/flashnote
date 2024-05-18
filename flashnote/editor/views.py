@@ -1,18 +1,12 @@
 from django.shortcuts import render
 from .models import Note
-from .forms import NoteForm, NoteFormSet
+from .forms import NoteFormSet
 
 
-def notes_questions_list(request):
+def notes_list(request):
     notes_formset = NoteFormSet(queryset=Note.objects.all().order_by('created'))
-    for note in notes_formset:
-        print(note)
     if request.method == 'POST':
-        #print(request.POST)
-        new_notes_formset = NoteFormSet(request.POST)
-        for note in new_notes_formset:
-            print(note.instance.__class__)
-            print(note.instance.id)
-            print(note.instance.text)
-            print(note.instance.created)
+        notes_formset = NoteFormSet(request.POST)
+        if notes_formset.is_valid():
+            notes_formset.save()
     return render(request, 'editor/notes/list.html', {'notes_formset': notes_formset})
