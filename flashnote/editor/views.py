@@ -8,5 +8,7 @@ def notes_list(request):
     if request.method == 'POST':
         notes_formset = NoteFormSet(request.POST)
         if notes_formset.is_valid():
+            for note in notes_formset:
+                note.instance.author = request.user
             notes_formset.save()
     return render(request, 'editor/notes/list.html', {'notes_formset': notes_formset})

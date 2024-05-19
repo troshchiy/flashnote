@@ -5,17 +5,43 @@
 
 {% block content %}
     <h1>Editor</h1>
-    <input type="submit" value="save" form="notes_form">
-    <form id="notes_form" class="container" action="{% url 'editor:notes_list' %}" method="post">
-        {% csrf_token %}
-        {{ notes_formset.management_form }}
-        {% for form in notes_formset %}
-            <div class="question" style="{% if not form.question.value %}display: none;{% endif %}">{{ form.question }}</div>
-            <div class="note">{{ form.text }}</div>
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
+    <input type="submit" value="save" form="form-container">
+    <button id="add-note" type="button" >Add Note</button>
+    <form id="form-container" action="{% url 'editor:notes_list' %}" method="post">
+            {% csrf_token %}
+            {{ notes_formset.management_form }}
+            {% for form in notes_formset %}
+                <div class="container note-form">
+                    <div class="question" style="{% if not form.question.value %}display: none;{% endif %}">{{ form.question }}</div>
+                    <div class="note">{{ form.text }}</div>
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                </div>
             {% endfor %}
-        {% endfor %}
     </form>
     <script src="{% static 'scripts/main.js' %}"></script>
+    <script>
+        let noteForm = document.querySelectorAll(".note-form")
+        let container = document.querySelector("#form-container")
+        let addButton = document.querySelector("#add-note")
+        let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
+
+        let formNum = noteForm.length-1 //Get the number of the last form on the page with zero-based indexing
+        addButton.addEventListener('click', addForm)
+
+        function addForm(e){
+            e.preventDefault()
+
+            let newForm = noteForm[0].cloneNode(true) //Clone the note form
+            let formRegex = RegExp(`form-(\\d){1}-`,'g') //Regex to find all instances of the form number
+
+            formNum++ //Increment the form number
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`) //Update the new form to have the correct form number
+            newForm.children[1].children[0].value = "";
+            container.appendChild(newForm) //Insert the new form at the end of the list of forms
+
+            totalForms.setAttribute('value', `${formNum+1}`) //Increment the number of total forms in the form management
+        }
+    </script>
 {% endblock %}
