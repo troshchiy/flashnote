@@ -14,8 +14,8 @@
             {% if request.user.is_authenticated %}
                 <li>
                     <div id="account-image"><img src="{% static 'images/account-circle.svg' %}"></div>
-                    <div>{{ request.user.get_full_name|default:request.user.username|truncatechars:20}}</div>
-                    <div>{{ request.user.email|truncatechars:20 }}</div>
+                    <div>{{ request.user.get_full_name|default:request.user.username|truncatechars:20 }}</div>
+                    <div>{{ request.user.email|truncatechars:18 }}</div>
                 </li>
                 <li>
                     <form action="{% url 'logout' %}" method="post">
