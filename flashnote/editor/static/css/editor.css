@@ -47,6 +47,20 @@ form p {
     overflow:auto;
 }
 
+input[type=submit] {
+    font-weight:bold;
+    background:#6f42c1;
+    color:#fff;
+    padding:10px 20px;
+    font-size:14px;
+    border-radius:5px;
+    min-width:250px;
+}
+
+input[type=submit]:hover {
+    background:#432874;
+}
+
 #sidebar {
     float:left;
     width:15%;
