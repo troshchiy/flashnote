@@ -1,0 +1,23 @@
+{% extends "editor/base.html" %}
+
+{% block title %}Notebooks{% endblock %}
+
+{% block content %}
+    <h1>Notebooks</h1>
+    <table class="notebooks">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Pages</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for notebook in notebooks %}
+                <tr>
+                    <td><a href="#">{{ notebook.title }}</a></td>
+                    <td>{{ notebook.pages.count }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -32,8 +32,8 @@
                 <li {% if section == "home" %}class="selected"{% endif %}>
                     <a href="{% url 'home' %}">Home</a>
                 </li>
-                <li {% if section == "Notebooks" %}class="selected"{% endif %}>
-                    <a href="#">Notebooks</a>
+                <li {% if section == "notebooks" %}class="selected"{% endif %}>
+                    <a href="{% url 'editor:notebooks_list' %}">Notebooks</a>
                 </li>
             </ul>
         {% endif %}
