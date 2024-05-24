@@ -14,8 +14,9 @@ def notebooks_list(request):
 
 @login_required
 def notebook_content(request, notebook_slug):
+    user_notebooks = Notebook.objects.filter(author=request.user)
     try:
-        notebook = Notebook.objects.get(slug=notebook_slug)
+        notebook = user_notebooks.get(slug=notebook_slug)
     except Notebook.DoesNotExist:
         raise Http404("No Notebook found.")
     pages = Page.objects.filter(notebook=notebook)
@@ -25,8 +26,10 @@ def notebook_content(request, notebook_slug):
 
 @login_required
 def page_content(request, page_slug):
+    user_notebooks = Notebook.objects.filter(author=request.user)
+    users_pages = Page.objects.filter(notebook__in=user_notebooks)
     try:
-        page = Page.objects.get(slug=page_slug)
+        page = users_pages.get(slug=page_slug)
     except Page.DoesNotExist:
         raise Http404("No Page found.")
     notes_formset = NoteFormSet(queryset=Note.objects.filter(page=page))
