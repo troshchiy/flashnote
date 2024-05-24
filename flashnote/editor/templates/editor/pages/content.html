@@ -4,9 +4,11 @@
 {% block title %}Editor{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-    <input type="submit" value="save" form="form-container">
-    <button id="add-note" type="button" >Add Note</button>
+    <div id="editor-header">
+        <input id="save-notes-btn" type="submit" value="save" form="form-container">
+        <button id="add-note-btn" type="button" >Add Note</button>
+    </div>
+    <h1 id="page-title">{{ page.title }}</h1>
     <form id="form-container" action="{% url 'editor:page_content' page.slug %}" method="post">
             {% csrf_token %}
             {{ notes_formset.management_form }}
