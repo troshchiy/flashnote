@@ -14,7 +14,7 @@
         <tbody>
             {% for notebook in notebooks %}
                 <tr>
-                    <td><a href="#">{{ notebook.title }}</a></td>
+                    <td><a href="{% url 'editor:notebook_content' notebook.slug %}">{{ notebook.title }}</a></td>
                     <td>{{ notebook.pages.count }}</td>
                 </tr>
             {% endfor %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from .models import Notebook, Page, Note
 from .forms import NoteFormSet
 
@@ -8,7 +9,18 @@ from .forms import NoteFormSet
 def notebooks_list(request):
     notebooks = Notebook.objects.filter(author=request.user).order_by('title')
     return render(request, 'editor/notebooks/list.html', {'notebooks': notebooks,
-                                                                                'section': 'notebooks'})
+                                                          'section': 'notebooks'})
+
+
+@login_required
+def notebook_content(request, notebook_slug):
+    try:
+        notebook = Notebook.objects.get(slug=notebook_slug)
+    except Notebook.DoesNotExist:
+        raise Http404("No Notebook found.")
+    pages = Page.objects.filter(notebook=notebook)
+    return render(request, 'editor/notebooks/content.html', {'notebook': notebook,
+                                                             'pages': pages})
 
 
 @login_required
