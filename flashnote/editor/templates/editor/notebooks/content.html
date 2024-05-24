@@ -14,7 +14,7 @@
         <tbody>
             {% for page in pages %}
                 <tr>
-                    <td><a href="#">{{ page.title }}</a></td>
+                    <td><a href="{% url 'editor:page_content' page.slug %}">{{ page.title }}</a></td>
                     <td>{{ page.notes.count }}</td>
                 </tr>
             {% endfor %}

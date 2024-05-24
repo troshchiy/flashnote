@@ -24,12 +24,15 @@ def notebook_content(request, notebook_slug):
 
 
 @login_required
-def notes_list(request):
-    notes_formset = NoteFormSet(queryset=Note.objects.all().order_by('created'))
+def page_content(request, page_slug):
+    try:
+        page = Page.objects.get(slug=page_slug)
+    except Page.DoesNotExist:
+        raise Http404("No Page found.")
+    notes_formset = NoteFormSet(queryset=Note.objects.filter(page=page))
     if request.method == 'POST':
         notes_formset = NoteFormSet(request.POST)
         if notes_formset.is_valid():
-            for note in notes_formset:
-                note.instance.author = request.user
             notes_formset.save()
-    return render(request, 'editor/notes/list.html', {'notes_formset': notes_formset})
+    return render(request, 'editor/pages/content.html', {'page': page,
+                                                         'notes_formset': notes_formset})
