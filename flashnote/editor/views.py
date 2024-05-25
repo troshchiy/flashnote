@@ -36,6 +36,8 @@ def page_content(request, page_slug):
     if request.method == 'POST':
         notes_formset = NoteFormSet(request.POST)
         if notes_formset.is_valid():
+            for note_form in notes_formset:
+                note_form.instance.page = page
             notes_formset.save()
     return render(request, 'editor/pages/content.html', {'page': page,
                                                          'notes_formset': notes_formset})

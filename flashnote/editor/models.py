@@ -25,7 +25,7 @@ class Page(models.Model):
 
 class Note(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    text = models.TextField()
+    text = models.TextField(null=True, blank=True)
     question = models.TextField(null=True, blank=True)
     page = models.ForeignKey(Page, related_name='notes', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)

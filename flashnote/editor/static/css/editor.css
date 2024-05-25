@@ -67,7 +67,7 @@ input[type=submit] {
     border-radius:5px;
     min-width:250px;
 }
-
+/*
 button {
     float:right;
     margin:8px 10px;
@@ -77,10 +77,35 @@ button {
     font-weight:bold;
     background:#6f42c1;
     color:#fff;
+    outline: none;
+    transition: 0.2s all;
+}
+*/
+button, #save-notes-btn {
+  float:right;
+  background-color: #6f42c1;
+  border:none;
+  font-size: 14px;
+  color: #fff;
+  border-radius:5px;
+  font-weight:bold;
+  margin:8px 10px;
+  padding:5px 20px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition: 0.2s all;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-input[type=submit]:hover, button:hover {
+input[type=submit]:hover, button:hover, #save-notes-btn:hover {
     background:#432874;
+}
+
+button:active, #save-notes-btn:active {
+    transform: scale(0.98);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }
 
 table {
@@ -182,9 +207,6 @@ table a:hover {
 }
 
 #save-notes-btn {
-    float:right;
-    margin:8px 10px;
-    padding:5px 20px;
     min-width:0;
 }
 
