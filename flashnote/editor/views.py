@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Notebook, Page, Note
-from .forms import NotebookFormSet, NoteFormSet
+from .forms import NotebookFormSet, PageFormSet, NoteFormSet
 
 
 @login_required
@@ -25,18 +25,33 @@ def notebook_content(request, notebook_id):
     try:
         notebook = user_notebooks.get(id=notebook_id)
     except Notebook.DoesNotExist:
-        raise Http404("No Notebook found.")
-    pages = Page.objects.filter(notebook=notebook)
+        raise Http404('No Notebook found.')
+
+    if request.method == 'POST':
+        pages_formset = PageFormSet(request.POST)
+        if pages_formset.is_valid():
+            for form in pages_formset:
+                form.instance.notebook = notebook
+            pages_formset.save()
+    else:
+        pages = Page.objects.filter(notebook=notebook)
+
+        if not pages:
+            new_page = Page(title='Untitled', notebook=notebook)
+            new_page.save()
+            pages |= Page.objects.filter(id=new_page.id)
+
+        pages_formset = PageFormSet(queryset=pages)
     return render(request, 'editor/notebooks/content.html', {'notebook': notebook,
-                                                             'pages': pages})
+                                                             'pages_formset': pages_formset})
 
 
 @login_required
-def page_content(request, page_slug):
+def page_content(request, page_id):
     user_notebooks = Notebook.objects.filter(author=request.user)
     users_pages = Page.objects.filter(notebook__in=user_notebooks)
     try:
-        page = users_pages.get(slug=page_slug)
+        page = users_pages.get(id=page_id)
     except Page.DoesNotExist:
         raise Http404("No Page found.")
     notes_formset = NoteFormSet(queryset=Note.objects.filter(page=page))

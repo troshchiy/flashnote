@@ -15,7 +15,6 @@ class Notebook(models.Model):
 class Page(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True)
     notebook = models.ForeignKey(Notebook, related_name='pages', on_delete=models.CASCADE)
 
     def __str__(self):

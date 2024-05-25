@@ -18,14 +18,14 @@ function addForm(e){
     newForm.querySelector("input").value = "Untitled";
     newForm.querySelector("input").removeAttribute("readonly");
     newForm.querySelector("a").setAttribute("onclick", "return false;");
-    newForm.querySelector(".pages-num").innerText = 0;
+    newForm.querySelector(".total-amount").innerText = 1;
 
     const confirmInput = document.createElement('input');
     confirmInput.value = 'Confirm';
     confirmInput.type = 'submit';
     confirmInput.form = "form-container";
     confirmInput.setAttribute("class", "confirm-button");
-    newForm.querySelector(".notebook-title").appendChild(confirmInput);
+    newForm.querySelector(".title").appendChild(confirmInput);
     container.appendChild(newForm) //Insert the new form at the end of the list of forms
     newForm.querySelector("input").focus();
 
