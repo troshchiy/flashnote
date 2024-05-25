@@ -14,7 +14,7 @@
             {{ notes_formset.management_form }}
             {% for form in notes_formset %}
                 <div class="container note-form">
-                    <div class="question" style="{% if not form.question.value %}display: none;{% endif %}">{{ form.question }}</div>
+                    <div class="question" value="{{ form.question.value }}">{{ form.question }}</div>
                     <div class="note">{{ form.text }}</div>
                     {% for hidden in form.hidden_fields %}
                         {{ hidden }}

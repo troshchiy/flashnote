@@ -12,7 +12,7 @@ class NoteForm(forms.ModelForm):
                 'oninput': 'auto_grow(this)'}),
             'question': forms.Textarea(attrs={
                 'rows': 1,
-                'oninput': 'auto_grow(this)'})
+                'oninput': 'auto_grow(this);set_parent_value(this);'})
         }
         labels = {'text': '',
                   'question': ''}
