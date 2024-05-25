@@ -7,7 +7,7 @@ body {
 }
 
 p {
-    line-height: 1.8;
+    line-height:1.8;
 }
 
 a {
@@ -19,7 +19,7 @@ a:hover {
     color:#6f42c1;
 }
 
-h1, h2, h3, h4, h5 , h6 { font-family: 'Open Sans', sans-serif; font-weight:normal; }
+h1, h2, h3, h4, h5 , h6 { font-family:'Open Sans', sans-serif; font-weight:normal; }
 
 h1 {
     border-bottom:1px solid #bbb;
@@ -30,17 +30,17 @@ h1 {
 textarea {
   clear:both;
   padding:5px 5px;
-  margin: 3px 0;
-  width: 100%;
-  height: 15px;
-  min-height: 14px;
+  margin:3px 0;
+  width:100%;
+  height:15px;
+  min-height:14px;
   resize:none;
   overflow:hidden;
   font-size:14px;
-  border: 1px solid #bbb;
+  border:1px solid #bbb;
   border-radius:5px;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  -webkit-transition:0.5s;
+  transition:0.5s;
   outline:none;
 }
 
@@ -67,50 +67,36 @@ input[type=submit] {
     border-radius:5px;
     min-width:250px;
 }
-/*
-button {
-    float:right;
-    margin:8px 10px;
-    padding:5px 20px;
-    font-size:14px;
-    border-radius:5px;
-    font-weight:bold;
-    background:#6f42c1;
-    color:#fff;
-    outline: none;
-    transition: 0.2s all;
-}
-*/
+
 button, #save-notes-btn {
   float:right;
-  background-color: #6f42c1;
+  background-color:#6f42c1;
   border:none;
-  font-size: 14px;
-  color: #fff;
+  font-size:14px;
+  color:#fff;
   border-radius:5px;
   font-weight:bold;
   margin:8px 10px;
   padding:5px 20px;
-  text-align: center;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition: 0.2s all;
-  text-decoration: none;
-  overflow: hidden;
-  cursor: pointer;
+  text-align:center;
+  transition:0.2s all;
+  text-decoration:none;
+  overflow:hidden;
+  cursor:pointer;
 }
 
 input[type=submit]:hover, button:hover, #save-notes-btn:hover {
     background:#432874;
 }
 
-button:active, #save-notes-btn:active {
-    transform: scale(0.98);
-    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+button:active, .confirm-button:active, #save-notes-btn:active {
+    transform:scale(0.98);
+    box-shadow:3px 2px 22px 1px rgba(0, 0, 0, 0.24);
 }
 
 table {
     width:50%;
-    border-collapse: collapse;
+    border-collapse:collapse;
 }
 
 table th, table td {
@@ -129,7 +115,14 @@ thead th {
     font-weight:bold;
 }
 
-table a:hover {
+table input {
+    cursor:pointer;
+    border:none;
+    float:left;
+    margin:4px 0;
+}
+
+table input:hover {
     color:#000;
     text-decoration:underline;
 }
@@ -187,7 +180,7 @@ table a:hover {
 }
 
 #sidebar #header .logo {
-    font-family: 'Open Sans', sans-serif;
+    font-family:'Open Sans', sans-serif;
     float:left;
     font-size:24px;
     font-weight:bold;
@@ -222,18 +215,44 @@ table a:hover {
 
 .note {
     grid-column-start:2;
-    width: 75%;
+    width:75%;
 }
 
 .question[value=""] textarea {
     grid-column-start:1;
-    width: 100%;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.5s;
+    width:100%;
+    visibility:hidden;
+    opacity:0;
+    transition:visibility 0s, opacity 0.5s;
 }
 
 .note-form:hover textarea, .question textarea:focus, .question:not([value=""]) textarea {
-    visibility: visible;
-    opacity: 1;
+    visibility:visible;
+    opacity:1;
+}
+
+#new-btn {
+    float:left;
+}
+
+.confirm-button {
+    float:left;
+    margin:0 5px !important;
+    font-weight:bold;
+    background:#6f42c1;
+    color:#fff;
+    padding:5px 20px !important;
+    border-radius:5px;
+    min-width:0 !important;
+    text-align:center;
+    transition: 0.2s all;
+    text-decoration: none;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.confirm-button:hover {
+    background:#432874;
+    color:#fff;
+    text-decoration:none;
 }

@@ -1,23 +1,33 @@
 {% extends "editor/base.html" %}
+{% load static %}
 
 {% block title %}Notebooks{% endblock %}
 
 {% block content %}
     <h1>Notebooks</h1>
-    <table class="notebooks">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Pages</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for notebook in notebooks %}
+    <form id="form-container" method="post">
+        {% csrf_token %}
+        {{ notebooks_formset.management_form }}
+        <table class="notebooks">
+            <thead>
                 <tr>
-                    <td><a href="{% url 'editor:notebook_content' notebook.slug %}">{{ notebook.title }}</a></td>
-                    <td>{{ notebook.pages.count }}</td>
+                    <th>Title</th>
+                    <th>Pages</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="container">
+                {% for notebook_form in notebooks_formset %}
+                    <tr class="form">
+                        <td class="notebook-title"><a href="{% url 'editor:notebook_content' notebook_form.instance.id %}">{{ notebook_form.title }}</a></td>
+                        <td class="pages-num">{{ notebook_form.instance.pages.count }}</td>
+                    </tr>
+                    {% for hidden in notebook_form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <button id="new-btn" type="button" >New Notebook</button>
+    </form>
+    <script src="{% static 'scripts/new.js' %}"></script>
 {% endblock %}

@@ -2,21 +2,28 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Notebook, Page, Note
-from .forms import NoteFormSet
+from .forms import NotebookFormSet, NoteFormSet
 
 
 @login_required
 def notebooks_list(request):
     notebooks = Notebook.objects.filter(author=request.user).order_by('title')
-    return render(request, 'editor/notebooks/list.html', {'notebooks': notebooks,
+    notebooks_formset = NotebookFormSet(queryset=notebooks)
+    if request.method == 'POST':
+        notebooks_formset = NotebookFormSet(request.POST)
+        if notebooks_formset.is_valid():
+            for form in notebooks_formset:
+                form.instance.author = request.user
+            notebooks_formset.save()
+    return render(request, 'editor/notebooks/list.html', {'notebooks_formset': notebooks_formset,
                                                           'section': 'notebooks'})
 
 
 @login_required
-def notebook_content(request, notebook_slug):
+def notebook_content(request, notebook_id):
     user_notebooks = Notebook.objects.filter(author=request.user)
     try:
-        notebook = user_notebooks.get(slug=notebook_slug)
+        notebook = user_notebooks.get(id=notebook_id)
     except Notebook.DoesNotExist:
         raise Http404("No Notebook found.")
     pages = Page.objects.filter(notebook=notebook)

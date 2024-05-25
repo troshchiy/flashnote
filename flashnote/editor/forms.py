@@ -1,5 +1,13 @@
 from django import forms
-from .models import Note
+from .models import Notebook, Note
+
+
+class NotebookForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+
+    class Meta:
+        model = Notebook
+        fields = ['title']
 
 
 class NoteForm(forms.ModelForm):
@@ -18,4 +26,5 @@ class NoteForm(forms.ModelForm):
                   'question': ''}
 
 
+NotebookFormSet = forms.modelformset_factory(Notebook, form=NotebookForm, extra=0)
 NoteFormSet = forms.modelformset_factory(Note, form=NoteForm, extra=0)
