@@ -15,10 +15,12 @@ function addForm(e){
 
     formNum++ //Increment the form number
     newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`) //Update the new form to have the correct form number
-    newForm.querySelector("input").value = "Untitled";
     newForm.querySelector("input").removeAttribute("readonly");
-    newForm.querySelector("a").setAttribute("onclick", "return false;");
-    newForm.querySelector(".total-amount").innerText = 1;
+    outerLink = newForm.querySelector("a")
+    outerLink.outerHTML = outerLink.innerHTML;
+    newForm.querySelector("input").value = "Untitled";
+    newForm.querySelector("input").style.cursor = "text";
+    newForm.querySelector(".total-amount").innerText = 0;
 
     const confirmInput = document.createElement('input');
     confirmInput.value = 'Confirm';

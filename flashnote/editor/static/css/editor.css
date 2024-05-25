@@ -27,6 +27,20 @@ h1 {
     margin:10px 0 20px 0;
 }
 
+input[type=text], input[type=password] {
+    font-size:14px;
+    padding:4px 4px;
+    border:1px solid #bbb;
+    border-radius:5px;
+    -webkit-transition:0.5s;
+    transition:0.5s;
+    outline:none;
+}
+
+input[readonly] {
+        border:none;
+}
+
 textarea {
   clear:both;
   padding:5px 5px;
@@ -44,7 +58,7 @@ textarea {
   outline:none;
 }
 
-textarea:focus {
+textarea:focus, input[type=text]:focus, input[type=password]:focus {
     border:1px solid #6f42c1;
 }
 
@@ -106,6 +120,10 @@ table th, table td {
     margin:0;
 }
 
+.total-amount {
+    text-align:center;
+}
+
 table tr {
     border-bottom:1px solid black;
 }
@@ -119,7 +137,6 @@ table input {
     cursor:pointer;
     border:none;
     float:left;
-    margin:4px 0;
 }
 
 table input:hover {

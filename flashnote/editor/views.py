@@ -54,12 +54,21 @@ def page_content(request, page_id):
         page = users_pages.get(id=page_id)
     except Page.DoesNotExist:
         raise Http404("No Page found.")
-    notes_formset = NoteFormSet(queryset=Note.objects.filter(page=page))
+
     if request.method == 'POST':
         notes_formset = NoteFormSet(request.POST)
         if notes_formset.is_valid():
             for note_form in notes_formset:
                 note_form.instance.page = page
             notes_formset.save()
+    else:
+        notes = Note.objects.filter(page=page)
+
+        if not notes:
+            new_note = Note(page=page)
+            new_note.save()
+            notes |= Note.objects.filter(id=new_note.id)
+
+        notes_formset = NoteFormSet(queryset=notes)
     return render(request, 'editor/pages/content.html', {'page': page,
                                                          'notes_formset': notes_formset})
