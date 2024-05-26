@@ -28,6 +28,7 @@ class Note(models.Model):
     page = models.ForeignKey(Page, related_name='notes', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    order = models.IntegerField()
 
     def __str__(self):
         return f'Note id:{self.id}\nQuestion: "{self.question}"\nText: "{self.text}"'

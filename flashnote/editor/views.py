@@ -58,14 +58,15 @@ def page_content(request, page_id):
     if request.method == 'POST':
         notes_formset = NoteFormSet(request.POST)
         if notes_formset.is_valid():
-            for note_form in notes_formset:
+            for order, note_form in enumerate(notes_formset.ordered_forms):
                 note_form.instance.page = page
-            notes_formset.save()
+                note_form.instance.order = order
+                note_form.save()
     else:
-        notes = Note.objects.filter(page=page)
+        notes = Note.objects.filter(page=page).order_by('order')
 
         if not notes:
-            new_note = Note(page=page)
+            new_note = Note(page=page, order=1)
             new_note.save()
             notes |= Note.objects.filter(id=new_note.id)
 

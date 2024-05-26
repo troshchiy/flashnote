@@ -14,9 +14,10 @@ function addForm(e){
 
     formNum++ //Increment the form number
     newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`) //Update the new form to have the correct form number
-    newForm.children[0].setAttribute('value', "");
-    newForm.children[0].children[0].value = "";
-    newForm.children[1].children[0].value = "";
+    newForm.querySelector(".question").setAttribute('value', "");
+    newForm.querySelector(".question").querySelector("textarea").value = "";
+    newForm.querySelector(".note").querySelector("textarea").value = "";
+    newForm.querySelector(".order").value = formNum+1;
     container.appendChild(newForm) //Insert the new form at the end of the list of forms
 
     totalForms.setAttribute('value', `${formNum+1}`) //Increment the number of total forms in the form management

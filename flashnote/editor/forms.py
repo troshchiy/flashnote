@@ -2,6 +2,10 @@ from django import forms
 from .models import Notebook, Page, Note
 
 
+class BaseNoteFormSet(forms.BaseModelFormSet):
+    ordering_widget = forms.HiddenInput(attrs={'class': 'order'})
+
+
 class NotebookForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
 
@@ -36,4 +40,4 @@ class NoteForm(forms.ModelForm):
 
 NotebookFormSet = forms.modelformset_factory(Notebook, form=NotebookForm, extra=0)
 PageFormSet = forms.modelformset_factory(Page, form=PageForm, extra=0)
-NoteFormSet = forms.modelformset_factory(Note, form=NoteForm, extra=0)
+NoteFormSet = forms.modelformset_factory(Note, form=NoteForm, formset=BaseNoteFormSet, extra=0, can_order=True)
