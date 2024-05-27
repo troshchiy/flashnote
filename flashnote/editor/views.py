@@ -63,7 +63,7 @@ def page_content(request, page_id):
                 note_form.instance.order = order
                 note_form.save()
     else:
-        notes = Note.objects.filter(page=page).order_by('order')
+        notes = Note.objects.filter(page=page)
 
         if not notes:
             new_note = Note(page=page, order=1)

@@ -30,5 +30,11 @@ class Note(models.Model):
     updated = models.DateTimeField(auto_now=True)
     order = models.IntegerField()
 
+    class Meta:
+        ordering = ['order']
+        indexes = [
+            models.Index(fields=['order']),
+        ]
+
     def __str__(self):
         return f'Note id:{self.id}\nQuestion: "{self.question}"\nText: "{self.text}"'
