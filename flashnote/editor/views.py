@@ -7,14 +7,20 @@ from .forms import NotebookFormSet, PageFormSet, NoteFormSet
 
 @login_required
 def notebooks_list(request):
-    notebooks = Notebook.objects.filter(author=request.user).order_by('title')
-    notebooks_formset = NotebookFormSet(queryset=notebooks)
     if request.method == 'POST':
         notebooks_formset = NotebookFormSet(request.POST)
         if notebooks_formset.is_valid():
             for form in notebooks_formset:
                 form.instance.author = request.user
             notebooks_formset.save()
+
+    notebooks = Notebook.objects.filter(author=request.user).order_by('title')
+    if not notebooks:
+        new_notebook = Page(title='Untitled', author=request.user)
+        new_notebook.save()
+        notebooks |= Notebook.objects.filter(id=new_notebook.id)
+
+    notebooks_formset = NotebookFormSet(queryset=notebooks)
     return render(request, 'editor/notebooks/list.html', {'notebooks_formset': notebooks_formset,
                                                           'section': 'notebooks'})
 
@@ -33,15 +39,15 @@ def notebook_content(request, notebook_id):
             for form in pages_formset:
                 form.instance.notebook = notebook
             pages_formset.save()
-    else:
-        pages = Page.objects.filter(notebook=notebook)
 
-        if not pages:
-            new_page = Page(title='Untitled', notebook=notebook)
-            new_page.save()
-            pages |= Page.objects.filter(id=new_page.id)
+    pages = Page.objects.filter(notebook=notebook)
 
-        pages_formset = PageFormSet(queryset=pages)
+    if not pages:
+        new_page = Page(title='Untitled', notebook=notebook)
+        new_page.save()
+        pages |= Page.objects.filter(id=new_page.id)
+
+    pages_formset = PageFormSet(queryset=pages)
     return render(request, 'editor/notebooks/content.html', {'notebook': notebook,
                                                              'pages_formset': pages_formset})
 

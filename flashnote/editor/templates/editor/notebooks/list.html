@@ -20,6 +20,14 @@
                     <tr class="form">
                         <td class="title"><a href="{% url 'editor:notebook_content' notebook_form.instance.id %}">{{ notebook_form.title }}</a></td>
                         <td class="total-amount">{{ notebook_form.instance.pages.count }}</td>
+                        <td class="material-symbols-outlined" onclick="show_popup_menu(this)">drag_indicator
+                            <div class="popup-menu">
+                                <button id="delete-btn" onclick="delete_row_form(this.parentNode.parentNode.parentNode)">
+                                    Delete
+                                </button>
+                                {{ notebook_form.DELETE }}
+                            </div>
+                        </td>
                     </tr>
                     {% for hidden in notebook_form.hidden_fields %}
                         {{ hidden }}
@@ -30,4 +38,5 @@
         <button id="new-btn" type="button" >New Notebook</button>
     </form>
     <script src="{% static 'scripts/new.js' %}"></script>
+    <script src="{% static 'scripts/popup_menu.js' %}"></script>
 {% endblock %}

@@ -119,14 +119,11 @@ table th, table td {
     font-size:14px;
     padding:10px;
     margin:0;
+    border-bottom:1px solid black;
 }
 
 .total-amount {
     text-align:center;
-}
-
-table tr {
-    border-bottom:1px solid black;
 }
 
 thead th {
@@ -267,6 +264,12 @@ table input:hover {
   position:relative;
 }
 
+table td.material-symbols-outlined {
+    border-bottom:none;
+    padding:0;
+    margin:10px 0;
+}
+
 .material-symbols-outlined:hover {
     background:#efefef;
     border-radius:5px;
@@ -300,7 +303,8 @@ table input:hover {
 .note-form:hover textarea,
 .question textarea:focus,
 .question:not([value=""]) textarea,
-.note-form:hover .material-symbols-outlined {
+.note-form:hover .material-symbols-outlined,
+ tr.form:hover .material-symbols-outlined {
     visibility:visible;
     opacity:1;
 }

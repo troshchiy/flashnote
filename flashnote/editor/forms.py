@@ -39,7 +39,9 @@ class NoteForm(forms.ModelForm):
                   'question': ''}
 
 
-NotebookFormSet = forms.modelformset_factory(Notebook, form=NotebookForm, extra=0)
-PageFormSet = forms.modelformset_factory(Page, form=PageForm, extra=0)
+NotebookFormSet = forms.modelformset_factory(Notebook, form=NotebookForm, formset=BaseNoteFormSet, extra=0,
+                                             can_delete=True)
+PageFormSet = forms.modelformset_factory(Page, form=PageForm, formset=BaseNoteFormSet, extra=0,
+                                         can_delete=True)
 NoteFormSet = forms.modelformset_factory(Note, form=NoteForm, formset=BaseNoteFormSet, extra=0, can_order=True,
                                          can_delete=True)

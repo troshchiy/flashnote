@@ -21,9 +21,9 @@
                             <button id="delete-btn" onclick="delete_form(this.parentNode.parentNode.parentNode)">
                                 Delete
                             </button>
+                            {{ form.DELETE }}
                         </div>
                     </div>
-                    {{ form.DELETE }}
                     {% for hidden in form.hidden_fields %}
                         {{ hidden }}
                     {% endfor %}

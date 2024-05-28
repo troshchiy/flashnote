@@ -30,3 +30,10 @@ function delete_form(form) {
     form.style.display = "none";
     form.querySelector("input[class=deletion]").checked = "true";
 }
+
+
+function delete_row_form(row_form) {
+    event.preventDefault();
+    row_form.querySelector("input[class=deletion]").checked = "true";
+    document.querySelector("#form-container").submit();
+}

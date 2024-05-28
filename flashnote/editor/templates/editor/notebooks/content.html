@@ -20,6 +20,14 @@
                     <tr class="form">
                         <td class="title"><a href="{% url 'editor:page_content' page_form.instance.id %}">{{ page_form.title }}</a></td>
                         <td class="total-amount">{{ page_form.instance.notes.count }}</td>
+                        <td class="material-symbols-outlined" onclick="show_popup_menu(this)">drag_indicator
+                                <div class="popup-menu">
+                                    <button id="delete-btn" onclick="delete_row_form(this.parentNode.parentNode.parentNode)">
+                                        Delete
+                                    </button>
+                                    {{ page_form.DELETE }}
+                                </div>
+                        </td>
                     </tr>
                     {% for hidden in page_form.hidden_fields %}
                         {{ hidden }}
@@ -30,4 +38,5 @@
         <button id="new-btn" type="button" >New Page</button>
     </form>
     <script src="{% static 'scripts/new.js' %}"></script>
+    <script src="{% static 'scripts/popup_menu.js' %}"></script>
 {% endblock %}
