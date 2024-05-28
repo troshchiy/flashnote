@@ -6,7 +6,7 @@
 {% block content %}
     <div id="editor-header">
         <input id="save-notes-btn" type="submit" value="save" form="form-container">
-        <button id="add-note-btn" type="button" >Add Note</button>
+        <button id="add-note-btn" type="button" onclick="addForm();">Add Note</button>
     </div>
     <h1 id="page-title">{{ page.title }}</h1>
     <form id="form-container" action="{% url 'editor:page_content' page.id %}" method="post">

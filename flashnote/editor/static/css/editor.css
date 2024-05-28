@@ -290,8 +290,11 @@ table td.material-symbols-outlined {
 }
 
 .shown {
-    visibility:visible;
-    opacity:1;
+    visibility:visible !important;
+    opacity:1 !important;
+}
+
+.material-symbols-outlined.shown {
     background:#efefef;
     border-radius:5px;
 }
