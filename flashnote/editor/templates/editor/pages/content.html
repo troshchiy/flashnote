@@ -16,6 +16,14 @@
                 <div class="container note-form">
                     <div class="question" value="{% if form.question.value %}{{ form.question.value }}{% else %}{% endif %}">{{ form.question }}</div>
                     <div class="note">{{ form.text }}</div>
+                    <div class="material-symbols-outlined" onclick="show_popup_menu(this)">drag_indicator
+                        <div class="popup-menu">
+                            <button id="delete-btn" onclick="delete_form(this.parentNode.parentNode.parentNode)">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                    {{ form.DELETE }}
                     {% for hidden in form.hidden_fields %}
                         {{ hidden }}
                     {% endfor %}
@@ -24,4 +32,5 @@
     </form>
     <script src="{% static 'scripts/main.js' %}"></script>
     <script src="{% static 'scripts/add_note.js' %}"></script>
+    <script src="{% static 'scripts/popup_menu.js' %}"></script>
 {% endblock %}

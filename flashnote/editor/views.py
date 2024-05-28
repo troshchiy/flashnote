@@ -61,15 +61,16 @@ def page_content(request, page_id):
             for order, note_form in enumerate(notes_formset.ordered_forms):
                 note_form.instance.page = page
                 note_form.instance.order = order
-                note_form.save()
-    else:
-        notes = Note.objects.filter(page=page)
+                note_form.instance.save(update_fields=['order'])
+            notes_formset.save()
 
-        if not notes:
-            new_note = Note(page=page, order=1)
-            new_note.save()
-            notes |= Note.objects.filter(id=new_note.id)
+    notes = Note.objects.filter(page=page)
 
-        notes_formset = NoteFormSet(queryset=notes)
+    if not notes:
+        new_note = Note(page=page, order=1)
+        new_note.save()
+        notes |= Note.objects.filter(id=new_note.id)
+
+    notes_formset = NoteFormSet(queryset=notes)
     return render(request, 'editor/pages/content.html', {'page': page,
                                                          'notes_formset': notes_formset})

@@ -4,6 +4,7 @@ from .models import Notebook, Page, Note
 
 class BaseNoteFormSet(forms.BaseModelFormSet):
     ordering_widget = forms.HiddenInput(attrs={'class': 'order'})
+    deletion_widget = forms.CheckboxInput(attrs={'class': 'deletion'})
 
 
 class NotebookForm(forms.ModelForm):
@@ -40,4 +41,5 @@ class NoteForm(forms.ModelForm):
 
 NotebookFormSet = forms.modelformset_factory(Notebook, form=NotebookForm, extra=0)
 PageFormSet = forms.modelformset_factory(Page, form=PageForm, extra=0)
-NoteFormSet = forms.modelformset_factory(Note, form=NoteForm, formset=BaseNoteFormSet, extra=0, can_order=True)
+NoteFormSet = forms.modelformset_factory(Note, form=NoteForm, formset=BaseNoteFormSet, extra=0, can_order=True,
+                                         can_delete=True)
