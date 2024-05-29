@@ -8,14 +8,14 @@
 <body>
     <div id="sidebar">
         <div id="header">
-            <span class="logo">Flashnote</span>
+            <div class="logo">Flashnote</div>
         </div>
         <ul class="user">
             {% if request.user.is_authenticated %}
                 <li>
                     <div id="account-image"><img src="{% static 'images/account-circle.svg' %}"></div>
                     <div>{{ request.user.get_full_name|default:request.user.username|truncatechars:20 }}</div>
-                    <div>{{ request.user.email|truncatechars:18 }}</div>
+                    <div>{{ request.user.email|truncatechars:15 }}</div>
                 </li>
                 <li>
                     <form action="{% url 'logout' %}" method="post">
