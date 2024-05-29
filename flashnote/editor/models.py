@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from uuid import uuid4
+from datetime import timedelta
 
 
 class UserNotebooksQuerySet(models.query.QuerySet):
@@ -38,12 +39,18 @@ class Page(models.Model):
 
 class Note(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-    text = models.TextField(null=True, blank=True)
-    question = models.TextField(null=True, blank=True)
+    text = models.TextField(blank=True)
+    question = models.TextField(blank=True)
     page = models.ForeignKey(Page, related_name='notes', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     order = models.IntegerField()
+
+    repetition_number = models.IntegerField(default=0)
+    easiness_factor = models.DecimalField(default=2.5, max_digits=5, decimal_places=2)
+    inter_repetition_interval = models.DurationField(default=timedelta(days=0))
+    last_review = models.DateTimeField(null=True)
+    next_review = models.DateTimeField(null=True)
 
     class Meta:
         ordering = ['order']
