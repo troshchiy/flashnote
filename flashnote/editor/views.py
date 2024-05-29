@@ -14,7 +14,7 @@ def notebooks_list(request):
                 form.instance.author = request.user
             notebooks_formset.save()
 
-    notebooks = Notebook.objects.filter(author=request.user).order_by('title')
+    notebooks = Notebook.objects.user(request.user).order_by('title')
     if not notebooks:
         new_notebook = Page(title='Untitled', author=request.user)
         new_notebook.save()
@@ -27,11 +27,10 @@ def notebooks_list(request):
 
 @login_required
 def notebook_content(request, notebook_id):
-    user_notebooks = Notebook.objects.filter(author=request.user)
     try:
-        notebook = user_notebooks.get(id=notebook_id)
+        notebook = Notebook.objects.user(request.user).get(id=notebook_id)
     except Notebook.DoesNotExist:
-        raise Http404('No Notebook found.')
+        raise Http404
 
     if request.method == 'POST':
         pages_formset = PageFormSet(request.POST)
@@ -54,12 +53,10 @@ def notebook_content(request, notebook_id):
 
 @login_required
 def page_content(request, page_id):
-    user_notebooks = Notebook.objects.filter(author=request.user)
-    users_pages = Page.objects.filter(notebook__in=user_notebooks)
     try:
-        page = users_pages.get(id=page_id)
+        page = Page.objects.user(request.user).get(id=page_id)
     except Page.DoesNotExist:
-        raise Http404("No Page found.")
+        raise Http404
 
     if request.method == 'POST':
         notes_formset = NoteFormSet(request.POST)

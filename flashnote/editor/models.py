@@ -3,13 +3,26 @@ from django.contrib.auth.models import User
 from uuid import uuid4
 
 
+class UserNotebooksQuerySet(models.query.QuerySet):
+    def user(self, user):
+        return self.filter(author=user)
+
+
+class UserPagesQuerySet(models.query.QuerySet):
+    def user(self, user):
+        user_notebooks = Notebook.objects.user(user=user)
+        return self.filter(notebook__in=user_notebooks)
+
+
 class Notebook(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     title = models.CharField(max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notebooks')
 
+    objects = UserNotebooksQuerySet.as_manager()
+
     def __str__(self):
-        return f'Notebook {self.title}'
+        return self.title
 
 
 class Page(models.Model):
@@ -17,8 +30,10 @@ class Page(models.Model):
     title = models.CharField(max_length=200)
     notebook = models.ForeignKey(Notebook, related_name='pages', on_delete=models.CASCADE)
 
+    objects = UserPagesQuerySet.as_manager()
+
     def __str__(self):
-        return f'Page {self.title}'
+        return self.title
 
 
 class Note(models.Model):
