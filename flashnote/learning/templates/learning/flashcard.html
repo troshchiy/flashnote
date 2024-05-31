@@ -1,0 +1,44 @@
+{% extends 'editor/base.html' %}
+{% load static %}
+
+{% block title %}Learning{% endblock %}
+
+{% block content %}
+    <h1>Learning</h1>
+    <form id="flashcard" method="post" data-note="{{ flashcard_form.instance.id }}"
+          action="{% url 'learning:learn' flashcard_form.instance.page.id %}">
+        {% csrf_token %}
+        <div id="recall-tip">Try to recall the information:</div>
+        <div id="flashcard-question">{{ flashcard_form.question }}</div>
+        <div id="flashcard-answer">{{ flashcard_form.text }}</div>
+        <input type="hidden" name="note_id" value="{{ flashcard_form.instance.id }}">
+        {% for hidden in flashcard_form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+        <button id="show-answer-btn" onclick="showAnswer();">Show Answer</button>
+        <div id="grade-bar">
+            <p id="grade-tip">Specify a grade indicating the quality of your response:</p>
+            <div id="grade">
+                <input type="submit" name="user_grade" value="0">
+                <input type="submit" name="user_grade" value="1">
+                <input type="submit" name="user_grade" value="2">
+                <input type="submit" name="user_grade" value="3">
+                <input type="submit" name="user_grade" value="4">
+                <input type="submit" name="user_grade" value="5">
+            </div>
+        </div>
+    </form>
+    <div id="grade-meaning">
+        <p>Each grade having the following meaning:</p>
+        <ul>
+            <li>0: "Total blackout", complete failure to recall the information.</li>
+            <li>1: Incorrect response, but upon seeing the correct answer it felt familiar.</li>
+            <li>2: Incorrect response, but upon seeing the correct answer it seemed easy to remember.</li>
+            <li>3: Correct response, but required significant effort to recall.</li>
+            <li>4: Correct response, after some hesitation.</li>
+            <li>5: Correct response with perfect recall.</li>
+        </ul>
+    </div>
+    <script src="{% static 'scripts/main.js' %}"></script>
+    <script src="{% static 'scripts/flashcard.js' %}"></script>
+{% endblock %}

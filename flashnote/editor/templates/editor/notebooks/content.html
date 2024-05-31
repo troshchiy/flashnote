@@ -22,6 +22,9 @@
                         <td class="total-amount">{{ page_form.instance.notes.count }}</td>
                         <td class="material-symbols-outlined" onclick="show_popup_menu(this)">drag_indicator
                                 <div class="popup-menu">
+                                    <a class="button" href="{% url 'learning:learn' page_form.instance.id %}">
+                                        Learn
+                                    </a>
                                     <button id="delete-btn" onclick="delete_row_form(this.parentNode.parentNode.parentNode)">
                                         Delete
                                     </button>

@@ -70,7 +70,7 @@ def page_content(request, page_id):
     notes = Note.objects.filter(page=page)
 
     if not notes:
-        new_note = Note(page=page, order=1)
+        new_note = Note(question='', text='', page=page, order=0)
         new_note.save()
         notes |= Note.objects.filter(id=new_note.id)
 
