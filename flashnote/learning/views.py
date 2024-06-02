@@ -3,24 +3,40 @@ from django.utils import timezone
 from django.shortcuts import render
 from django.http import Http404
 from django.views import View
-from editor.models import Page, Note
+from editor.models import Notebook, Page, Note
 from editor.forms import NoteForm
 
 
 class LearnView(View):
     template_name = 'learning/flashcard.html'
 
-    def get(self, request, page_id):
-        try:
-            page = Page.objects.user(request.user).get(id=page_id)
-        except Page.DoesNotExist:
+    def get(self, request, notebook_or_page, notebook_or_page_id):
+        if notebook_or_page == 'notebook':
+            try:
+                notebook = Notebook.objects.user(request.user).get(id=notebook_or_page_id)
+            except Notebook.DoesNotExist:
+                raise Http404
+
+            pages = Page.objects.filter(notebook=notebook)
+            flashcards = Note.objects.filter(page__in=pages).exclude(question='').order_by('next_review')
+            notebook_or_page_title = notebook.title
+        elif notebook_or_page == 'page':
+            try:
+                page = Page.objects.user(request.user).get(id=notebook_or_page_id)
+            except Page.DoesNotExist:
+                raise Http404
+            flashcards = Note.objects.filter(page=page).exclude(question='').order_by('next_review')
+            notebook_or_page_title = page.title
+        else:
             raise Http404
 
-        flashcards = Note.objects.filter(page=page).exclude(question='').order_by('next_review')
         flashcard_form = NoteForm(instance=flashcards[0])
-        return render(request, self.template_name, {'flashcard_form': flashcard_form})
+        return render(request, self.template_name, {'notebook_or_page': notebook_or_page,
+                                                    'notebook_or_page_id': notebook_or_page_id,
+                                                    'notebook_or_page_title': notebook_or_page_title,
+                                                    'flashcard_form': flashcard_form})
 
-    def post(self, request, page_id):
+    def post(self, request, notebook_or_page, notebook_or_page_id):
         try:
             flashcard = Note.objects.get(id=request.POST['note_id'])
         except Note.DoesNotExist:
@@ -51,5 +67,4 @@ class LearnView(View):
             flashcard.easiness_factor = 1.3
 
         flashcard.save()
-        return self.get(request, page_id)
-
+        return self.get(request, notebook_or_page, notebook_or_page_id)

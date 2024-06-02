@@ -1,12 +1,12 @@
 {% extends 'editor/base.html' %}
 {% load static %}
 
-{% block title %}Learning{% endblock %}
+{% block title %}Learn - {{ notebook_or_page_title }}{% endblock %}
 
 {% block content %}
-    <h1>Learning</h1>
+    <h1>{{ notebook_or_page_title }}</h1>
     <form id="flashcard" method="post" data-note="{{ flashcard_form.instance.id }}"
-          action="{% url 'learning:learn' flashcard_form.instance.page.id %}">
+          action="{% url 'learning:learn' notebook_or_page notebook_or_page_id %}">
         {% csrf_token %}
         <div id="recall-tip">Try to recall the information:</div>
         <div id="flashcard-question">{{ flashcard_form.question }}</div>

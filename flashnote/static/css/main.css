@@ -117,7 +117,7 @@ thead th {
 
 #sidebar {
     width:15%;
-    height:100vh;
+    height:99vh;
     background:#efefef;
     position:-webkit-sticky;
     position:sticky;

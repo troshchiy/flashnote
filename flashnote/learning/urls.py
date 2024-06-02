@@ -6,5 +6,5 @@ from . import views
 app_name = 'learning'
 
 urlpatterns = [
-    path('page/<uuid:page_id>/', login_required(views.LearnView.as_view()), name='learn')
+    path('<str:notebook_or_page>/<uuid:notebook_or_page_id>/', login_required(views.LearnView.as_view()), name='learn')
 ]

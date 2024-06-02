@@ -47,6 +47,7 @@ textarea:focus {
 .popup-menu .button, .popup-menu button {
     min-width:46px;
     box-sizing:content-box;
+    margin:4px 10px;
 }
 
 .confirm-button:active, #save-notes-btn:active {
