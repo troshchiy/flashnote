@@ -268,6 +268,7 @@ table input:hover {
   'opsz' 24;
   color:#808080;
   float:left;
+  height:25px;
   margin:4px 0;
   cursor:grab;
   visibility:hidden;
