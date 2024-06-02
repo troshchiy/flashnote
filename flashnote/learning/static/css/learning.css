@@ -1,0 +1,59 @@
+#flashcard {
+    width:60%;
+    min-height:30vh;
+    padding:15px;
+    position:relative;
+}
+
+#flashcard textarea:focus {
+    border:1px solid #bbb;
+}
+
+#flashcard-question, #flashcard-answer {
+    width:100%;
+}
+
+#flashcard-answer {
+    visibility:hidden;
+    opacity:0;
+}
+
+#show-answer-btn {
+    position:absolute;
+    bottom:0;
+    left:50%;
+    -webkit-transform:translateX(-50%);
+    transform:translateX(-50%);
+}
+
+#grade {
+    display:inline-flex;
+    justify-content:center;
+    visibility:hidden;
+    opacity:0;
+    position:relative;
+    bottom:0;
+    left:50%;
+    -webkit-transform:translateX(-50%);
+    transform:translateX(-50%);
+    transition:visibility 0s, opacity 0.5s;
+}
+
+#grade input[type=submit] {
+    min-width:20px;
+}
+
+#grade-tip, #grade-meaning {
+    visibility:hidden;
+    opacity:0;
+    transition:visibility 0s, opacity 0.5s;
+}
+
+#recall-tip {
+    margin:10px 0;
+    transition:visibility 0s, opacity 0.5s;
+}
+
+#grade-meaning ul {
+    list-style-type:none;
+}
