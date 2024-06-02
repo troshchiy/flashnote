@@ -5,7 +5,10 @@
 
 {% block content %}
     <div id="editor-header">
-        <input id="save-notes-btn" type="submit" value="save" form="form-container">
+        <span id="source">
+            <a href="{% url 'editor:notebook_content' page.notebook.id %}">{{ page.notebook }}</a> > {{ page.title }}
+        </span>
+        <input id="save-notes-btn" type="submit" value="Save" form="form-container">
         <button id="add-note-btn" type="button" onclick="addForm();">Add Note</button>
     </div>
     <h1 id="page-title">{{ page.title }}</h1>
