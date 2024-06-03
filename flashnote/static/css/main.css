@@ -77,7 +77,7 @@ button, a.button {
   font-variation-settings:'wght' 700;
   font-size:14px;
   line-height:normal;
-  color:#fff;
+  color:#fff !important;
   border-radius:5px;
   margin:8px 10px;
   padding:5px 20px;
@@ -144,6 +144,15 @@ thead th {
 
 #sidebar ul.user li {
     padding:0 10px;
+}
+
+.user form {
+    overflow:visible;
+}
+
+.user a {
+    float:right;
+    margin:2px 10px;
 }
 
 .user #account-image {

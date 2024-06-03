@@ -19,6 +19,8 @@
                     <div>{{ request.user.get_full_name|default:request.user.username|truncatechars:20 }}</div>
                     <div>{{ request.user.email|truncatechars:15 }}</div>
                 </li>
+                <li><a href="{% url 'edit' %}">Edit account</a></li>
+                <li><a href="{% url 'password_change' %}">Change password</a></li>
                 <li>
                     <form action="{% url 'logout' %}" method="post">
                         {% csrf_token %}
