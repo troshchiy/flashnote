@@ -7,7 +7,7 @@ function createForm() {
     let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
 
     formNum++ //Increment the form number
-
+    newForm.style = "";
     newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`)
     newForm.querySelector(".question").setAttribute("value", "");
     newForm.querySelector(".question").querySelector("textarea").value = "";

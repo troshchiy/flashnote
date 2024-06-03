@@ -61,7 +61,7 @@ input[readonly]:focus {
 
 form {
     overflow:auto;
-    padding:20px 0;
+    padding-bottom:50px;
 }
 
 form p {

@@ -15,11 +15,6 @@ def notebooks_list(request):
             notebooks_formset.save()
 
     notebooks = Notebook.objects.user(request.user).order_by('title')
-    if not notebooks:
-        new_notebook = Notebook(title='Untitled', author=request.user)
-        new_notebook.save()
-        notebooks |= Notebook.objects.filter(id=new_notebook.id)
-
     notebooks_formset = NotebookFormSet(queryset=notebooks)
     return render(request, 'editor/notebooks/list.html', {'notebooks_formset': notebooks_formset,
                                                           'section': 'notebooks'})
@@ -40,12 +35,6 @@ def notebook_content(request, notebook_id):
             pages_formset.save()
 
     pages = Page.objects.filter(notebook=notebook)
-
-    if not pages:
-        new_page = Page(title='Untitled', notebook=notebook)
-        new_page.save()
-        pages |= Page.objects.filter(id=new_page.id)
-
     pages_formset = PageFormSet(queryset=pages)
     return render(request, 'editor/notebooks/content.html', {'notebook': notebook,
                                                              'pages_formset': pages_formset})
@@ -68,12 +57,6 @@ def page_content(request, page_id):
             notes_formset.save()
 
     notes = Note.objects.filter(page=page)
-
-    if not notes:
-        new_note = Note(question='', text='', page=page, order=0)
-        new_note.save()
-        notes |= Note.objects.filter(id=new_note.id)
-
     notes_formset = NoteFormSet(queryset=notes)
     return render(request, 'editor/pages/content.html', {'page': page,
                                                          'notes_formset': notes_formset})

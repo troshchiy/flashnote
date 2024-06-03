@@ -14,6 +14,7 @@ function addForm(e){
     let formRegex = RegExp(`form-(\\d){1}-`,'g') //Regex to find all instances of the form number
 
     formNum++ //Increment the form number
+    newForm.style = "";
     newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formNum}-`); //Update the new form to have the correct form number
     newForm.querySelector("input").removeAttribute("readonly");
     outerLink = newForm.querySelector("a");

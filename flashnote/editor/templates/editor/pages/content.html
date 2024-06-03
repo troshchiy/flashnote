@@ -14,14 +14,41 @@
     <h1 id="page-title">{{ page.title }}</h1>
     <form id="form-container" action="{% url 'editor:page_content' page.id %}" method="post">
             {% csrf_token %}
-            {{ notes_formset.management_form }}
+            {% if notes_formset.total_form_count %}
+                {{ notes_formset.management_form }}
+            {% else %}
+                <input type="hidden" name="form-TOTAL_FORMS" value="1" id="id_form-TOTAL_FORMS">
+                <input type="hidden" name="form-INITIAL_FORMS" value="0" id="id_form-INITIAL_FORMS">
+                <input type="hidden" name="form-MIN_NUM_FORMS" value="0" id="id_form-MIN_NUM_FORMS">
+                <input type="hidden" name="form-MAX_NUM_FORMS" value="1000" id="id_form-MAX_NUM_FORMS">
+            {% endif %}
+            <div class="container note-form" style="{% if notes_formset.total_form_count %}display:none;{% else %}{% endif %}">
+                <div class="question" value="">
+                    <textarea name="form-0-question" cols="40" rows="1"
+                              oninput="auto_grow(this);set_parent_value(this);" id="id_form-0-question"
+                              style="height: 15px;"></textarea>
+                </div>
+                <div class="note">
+                    <textarea name="form-0-text" cols="40" rows="1" oninput="auto_grow(this)" id="id_form-0-text"
+                              style="height: 15px;"></textarea>
+                </div>
+                <div class="material-symbols-outlined" onclick="show_popup_menu(this)">drag_indicator
+                    <div class="popup-menu">
+                        <button class="delete-btn" onclick="delete_form(this.parentNode.parentNode.parentNode)">
+                            Delete
+                        </button>
+                        {{ form.DELETE }}
+                    </div>
+                </div>
+                <input type="hidden" name="form-0-ORDER" value="1" class="order" id="id_form-0-ORDER">
+            </div>
             {% for form in notes_formset %}
                 <div class="container note-form">
                     <div class="question" value="{% if form.question.value %}{{ form.question.value }}{% else %}{% endif %}">{{ form.question }}</div>
                     <div class="note">{{ form.text }}</div>
                     <div class="material-symbols-outlined" onclick="show_popup_menu(this)">drag_indicator
                         <div class="popup-menu">
-                            <button id="delete-btn" onclick="delete_form(this.parentNode.parentNode.parentNode)">
+                            <button class="delete-btn" onclick="delete_form(this.parentNode.parentNode.parentNode)">
                                 Delete
                             </button>
                             {{ form.DELETE }}

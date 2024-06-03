@@ -16,6 +16,26 @@
                 </tr>
             </thead>
             <tbody id="container">
+                <tr class="form" style="display:none;">
+                    <td class="title">
+                        <input type="text" name="form-0-title" value="" readonly="readonly" id="id_form-0-title">
+                    </td>
+                    <td class="total-amount">0</td>
+                    <td class="material-symbols-outlined" onclick="show_popup_menu(this)">drag_indicator
+                        <div class="popup-menu">
+                            <a class="button" href="#">
+                                Learn
+                            </a>
+                            <button class="rename-btn" onclick="renameRowForm(this.parentNode.parentNode.parentNode)">
+                                Rename
+                            </button>
+                            <button class="delete-btn" onclick="delete_row_form(this.parentNode.parentNode.parentNode)">
+                                Delete
+                            </button>
+                            {{ notebook_form.DELETE }}
+                        </div>
+                    </td>
+                </tr>
                 {% for notebook_form in notebooks_formset %}
                     <tr class="form">
                         <td class="title"><a href="{% url 'editor:notebook_content' notebook_form.instance.id %}">{{ notebook_form.title }}</a></td>
@@ -25,10 +45,10 @@
                                 <a class="button" href="{% url 'learning:learn' 'notebook' notebook_form.instance.id %}">
                                     Learn
                                 </a>
-                                <button id="rename-btn" onclick="renameRowForm(this.parentNode.parentNode.parentNode)">
+                                <button class="rename-btn" onclick="renameRowForm(this.parentNode.parentNode.parentNode)">
                                     Rename
                                 </button>
-                                <button id="delete-btn" onclick="delete_row_form(this.parentNode.parentNode.parentNode)">
+                                <button class="delete-btn" onclick="delete_row_form(this.parentNode.parentNode.parentNode)">
                                     Delete
                                 </button>
                                 {{ notebook_form.DELETE }}
