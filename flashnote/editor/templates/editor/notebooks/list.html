@@ -21,7 +21,7 @@
                         <input type="text" name="form-0-title" value="" readonly="readonly" id="id_form-0-title">
                     </td>
                     <td class="total-amount">0</td>
-                    <td class="material-symbols-outlined" onclick="show_popup_menu(this)">drag_indicator
+                    <td class="material-symbols-outlined" onclick="showPopupMenu(this)">drag_indicator
                         <div class="popup-menu">
                             <a class="button" href="#">
                                 Learn
@@ -29,7 +29,7 @@
                             <button class="rename-btn" onclick="renameRowForm(this.parentNode.parentNode.parentNode)">
                                 Rename
                             </button>
-                            <button class="delete-btn" onclick="delete_row_form(this.parentNode.parentNode.parentNode)">
+                            <button class="delete-btn" onclick="deleteRowForm(this.parentNode.parentNode.parentNode)">
                                 Delete
                             </button>
                             {{ notebook_form.DELETE }}
@@ -40,7 +40,7 @@
                     <tr class="form">
                         <td class="title"><a href="{% url 'editor:notebook_content' notebook_form.instance.id %}">{{ notebook_form.title }}</a></td>
                         <td class="total-amount">{{ notebook_form.instance.pages.count }}</td>
-                        <td class="material-symbols-outlined" onclick="show_popup_menu(this)">drag_indicator
+                        <td class="material-symbols-outlined" onclick="showPopupMenu(this)">drag_indicator
                             <div class="popup-menu">
                                 <a class="button" href="{% url 'learning:learn' 'notebook' notebook_form.instance.id %}">
                                     Learn
@@ -48,7 +48,7 @@
                                 <button class="rename-btn" onclick="renameRowForm(this.parentNode.parentNode.parentNode)">
                                     Rename
                                 </button>
-                                <button class="delete-btn" onclick="delete_row_form(this.parentNode.parentNode.parentNode)">
+                                <button class="delete-btn" onclick="deleteRowForm(this.parentNode.parentNode.parentNode)">
                                     Delete
                                 </button>
                                 {{ notebook_form.DELETE }}
