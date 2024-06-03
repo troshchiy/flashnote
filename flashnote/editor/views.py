@@ -16,7 +16,7 @@ def notebooks_list(request):
 
     notebooks = Notebook.objects.user(request.user).order_by('title')
     if not notebooks:
-        new_notebook = Page(title='Untitled', author=request.user)
+        new_notebook = Notebook(title='Untitled', author=request.user)
         new_notebook.save()
         notebooks |= Notebook.objects.filter(id=new_notebook.id)
 

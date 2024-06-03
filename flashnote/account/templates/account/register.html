@@ -1,0 +1,17 @@
+{% extends "editor/base.html" %}
+
+{% block title %}Create an account{% endblock %}
+
+{% block content %}
+    <h1>Welcome to Flashnote!</h1>
+    <p>Sign up and start taking notes.</p>
+    <form method="post">
+        {% for field in user_form %}
+            <p>{{ field.errors }}</p>
+            <p>{{ field.label_tag }}</p>
+            <p>{{ field }}</p>
+        {% endfor %}
+        {% csrf_token %}
+        <p><input type="submit" value="Create my account"></p>
+    </form>
+{% endblock %}

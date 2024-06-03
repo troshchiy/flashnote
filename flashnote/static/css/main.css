@@ -13,12 +13,11 @@ p {
 }
 
 a {
-    color:#000;
-    text-decoration:none;
+    color:#6f42c1;
 }
 
 a:hover {
-    color:#6f42c1;
+    color:#432874;
 }
 
 h1, h2, h3, h4, h5 , h6 { font-family:'Open Sans', sans-serif; font-weight:normal; }
@@ -122,6 +121,15 @@ thead th {
     position:-webkit-sticky;
     position:sticky;
     top:0;
+}
+
+#sidebar a {
+    color:#000;
+    text-decoration:none;
+}
+
+#sidebar a:hover {
+    color:#6f42c1;
 }
 
 #sidebar ul.user {
