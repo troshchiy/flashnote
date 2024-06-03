@@ -45,7 +45,8 @@ textarea:focus {
 }
 
 .popup-menu .button, .popup-menu button {
-    min-width:46px;
+    min-width:60px;
+    text-align:center;
     box-sizing:content-box;
     margin:4px 10px;
 }
@@ -144,7 +145,7 @@ table td.material-symbols-outlined {
   border-radius:5px;
   display:none;
   position:absolute;
-  top:-25px;
+  top:0;
   left:30px;
   cursor:default;
 }

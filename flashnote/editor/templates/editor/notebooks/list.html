@@ -25,6 +25,9 @@
                                 <a class="button" href="{% url 'learning:learn' 'notebook' notebook_form.instance.id %}">
                                     Learn
                                 </a>
+                                <button id="rename-btn" onclick="renameRowForm(this.parentNode.parentNode.parentNode)">
+                                    Rename
+                                </button>
                                 <button id="delete-btn" onclick="delete_row_form(this.parentNode.parentNode.parentNode)">
                                     Delete
                                 </button>
@@ -40,6 +43,6 @@
         </table>
         <button id="new-btn" type="button" >New Notebook</button>
     </form>
-    <script src="{% static 'scripts/new.js' %}"></script>
+    <script src="{% static 'scripts/new_rename.js' %}"></script>
     <script src="{% static 'scripts/popup_menu.js' %}"></script>
 {% endblock %}

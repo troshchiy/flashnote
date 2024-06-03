@@ -1,16 +1,16 @@
 function show_popup_menu(element) {
-  event.stopPropagation()
+    event.stopPropagation()
 
-  var current_popup_menu = element.querySelector(".popup-menu");
-  if (current_popup_menu.classList.contains("show")) {
+    var current_popup_menu = element.querySelector(".popup-menu");
+    if (current_popup_menu.classList.contains("show")) {
       current_popup_menu.classList.remove("show");
       element.classList.remove("shown");
-  }
-  else {
+    }
+    else {
       hide_all_popup_menus();
       current_popup_menu.classList.add("show");
       element.classList.add("shown");
-  }
+    }
 }
 
 function hide_all_popup_menus() {
