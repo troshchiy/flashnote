@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from .forms import UserEditForm
 
 
 @login_required
@@ -17,3 +18,14 @@ def register(request):
     else:
         user_form = UserCreationForm()
     return render(request, 'account/register.html', {'user_form': user_form})
+
+
+@login_required
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        if user_form.is_valid():
+            user_form.save()
+    else:
+        user_form = UserEditForm(instance=request.user)
+    return render(request, 'account/edit.html', {'user_form': user_form})
