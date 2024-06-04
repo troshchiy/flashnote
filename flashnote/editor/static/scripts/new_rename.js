@@ -21,7 +21,6 @@ function addForm(e){
     outerLink.outerHTML = outerLink.innerHTML;
     newForm.querySelector("input").value = "Untitled";
     newForm.querySelector("input").style.cursor = "text";
-    newForm.querySelector(".total-amount").innerText = 0;
     createConfirmInput(newForm.querySelector(".title"));
     container.appendChild(newForm) //Insert the new form at the end of the list of forms
     newForm.querySelector("input").focus();

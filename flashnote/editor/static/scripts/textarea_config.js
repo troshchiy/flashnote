@@ -1,4 +1,4 @@
-document.querySelectorAll("textarea").forEach(auto_grow)
+document.querySelectorAll("textarea").forEach(autoGrow)
 
 function autoGrow(element) {
     element.style.height = "auto";
