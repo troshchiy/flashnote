@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load editor_tags %}
 
 {% block title %}{{ notebook.title }}{% endblock %}
 
@@ -9,10 +10,18 @@
         {% csrf_token %}
         {{ pages_formset.management_form }}
         <table>
+            <col>
+            <colgroup span="3"></colgroup>
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th class="total-amount">Notes</th>
+                    <th class="title" rowspan="2">Title</th>
+                    <th class="total-notes" rowspan="2">Notes</th>
+                    <th colspan="3" scope="colgroup">Cards</th>
+                </tr>
+                <tr>
+                    <th scope="col">New</th>
+                    <th scope="col">Due</th>
+                    <th scope="col">Total</th>
                 </tr>
             </thead>
             <tbody id="container">
@@ -20,7 +29,10 @@
                     <td class="title">
                         <input type="text" name="form-0-title" value="" readonly="readonly" id="id_form-0-title">
                     </td>
-                    <td class="total-amount">0</td>
+                    <td class="total-notes">0</td>
+                    <td class="new-cards">0</td>
+                    <td class="due-cards">0</td>
+                    <td class="total-cards">0</td>
                     <td class="material-symbols-outlined" onclick="showPopupMenu(this)">drag_indicator
                         <div class="popup-menu">
                             <a class="button" href="#">
@@ -39,7 +51,10 @@
                 {% for page_form in pages_formset %}
                     <tr class="form">
                         <td class="title"><a href="{% url 'editor:page_content' page_form.instance.id %}">{{ page_form.title }}</a></td>
-                        <td class="total-amount">{{ page_form.instance.notes.count }}</td>
+                        <td class="total-notes">{% total_notes page_form.instance %}</td>
+                        <td class="new-cards">{% new_cards page_form.instance %}</td>
+                        <td class="due-cards">{% due_cards page_form.instance %}</td>
+                        <td class="total-cards">{% total_cards page_form.instance %}</td>
                         <td class="material-symbols-outlined" onclick="showPopupMenu(this)">drag_indicator
                                 <div class="popup-menu">
                                     <a class="button" href="{% url 'learning:learn' 'page' page_form.instance.id %}">

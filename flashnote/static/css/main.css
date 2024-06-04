@@ -97,14 +97,14 @@ button:active, a.button:active {
 }
 
 table {
-    width:50%;
+    width:75%;
     border-collapse:collapse;
 }
 
 table th, table td {
-    text-align:left;
+    text-align:center;
     font-size:14px;
-    padding:10px;
+    padding:2px;
     margin:0;
     border-bottom:1px solid black;
 }

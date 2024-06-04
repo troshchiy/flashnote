@@ -67,8 +67,8 @@ table input:hover {
     text-decoration:underline;
 }
 
-.total-amount {
-    text-align:center;
+table .title {
+    text-align:left;
 }
 
 #editor-header {
