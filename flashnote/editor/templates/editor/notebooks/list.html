@@ -20,9 +20,9 @@
                     <th colspan="3" scope="colgroup">Cards</th>
                 </tr>
                 <tr>
+                    <th scope="col">Total</th>
                     <th scope="col">New</th>
                     <th scope="col">Due</th>
-                    <th scope="col">Total</th>
                 </tr>
             </thead>
             <tbody id="container">
@@ -32,9 +32,9 @@
                     </td>
                     <td class="total-pages">0</td>
                     <td class="total-notes">0</td>
+                    <td class="total-cards">0</td>
                     <td class="new-cards">0</td>
                     <td class="due-cards">0</td>
-                    <td class="total-cards">0</td>
                     <td class="material-symbols-outlined" onclick="showPopupMenu(this)">drag_indicator
                         <div class="popup-menu">
                             <a class="button" href="#">
@@ -55,9 +55,9 @@
                         <td class="title"><a href="{% url 'editor:notebook_content' notebook_form.instance.id %}">{{ notebook_form.title }}</a></td>
                         <td class="total-pages">{{ notebook_form.instance.pages.count }}</td>
                         <td class="total-notes">{% total_notes notebook_form.instance %}</td>
+                        <td class="total-cards">{% total_cards notebook_form.instance %}</td>
                         <td class="new-cards">{% new_cards notebook_form.instance %}</td>
                         <td class="due-cards">{% due_cards notebook_form.instance %}</td>
-                        <td class="total-cards">{% total_cards notebook_form.instance %}</td>
                         <td class="material-symbols-outlined" onclick="showPopupMenu(this)">drag_indicator
                             <div class="popup-menu">
                                 <a class="button" href="{% url 'learning:learn' 'notebook' notebook_form.instance.id %}">
