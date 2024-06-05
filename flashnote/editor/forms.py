@@ -30,10 +30,12 @@ class NoteForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea(attrs={
                 'rows': 1,
-                'oninput': 'autoGrow(this)'}),
+                'oninput': 'autoGrow(this)',
+                'spellcheck': 'false'}),
             'question': forms.Textarea(attrs={
                 'rows': 1,
-                'oninput': 'autoGrow(this);setParentValue(this);'})
+                'oninput': 'autoGrow(this);setParentValue(this);',
+                'spellcheck': 'false'})
         }
         labels = {'text': '',
                   'question': ''}

@@ -4,6 +4,10 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import UserEditForm
 
 
+def main(request):
+    return render(request, 'account/main.html')
+
+
 @login_required
 def home(request):
     return render(request, 'account/dashboard.html', {'section': 'home'})

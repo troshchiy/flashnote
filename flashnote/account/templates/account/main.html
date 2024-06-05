@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <div class="logo">Noteflash</div>
+        <a href="{% url 'register' %}" class="button">Get Noteflash free</a>
+        <a href="{% url 'login' %}">Log in</a>
+    </div>
+    <div id="article">
+        <h1>Welcome to Noteflash!</h1>
+        <h2>What is Flashnote?</h2>
+        <p>Flashnote is a note-taking app that makes it easy to convert your notes into spaced repetition flashcards.</p>
+        <h2>How it works?</h2>
+        <p>The work area is divided into two columns: the note-taking column (on the right) and the questions/keyword column (on the left).</p>
+        <p>Notes from a lecture or text are written in the note-taking column.</p>
+        <p>To make a flashcard for future reviews, relevant questions or keywords are written in the left-hand column.</p>
+        <p>Only you decide which note will be turned into a flashcard, and which will remain only in the notes.</p>
+        <h2>Spaced repetition learning</h2>
+        <p>Spaced repetition is a clever technique for remembering things long-term.
+            With Noteflash, you practice just before you're likely to forget, which strengthens your memory.
+            As you practice more, you'll find you can wait longer between study sessions until you remember the info forever!</p>
+    </div>
+</body>
+</html>

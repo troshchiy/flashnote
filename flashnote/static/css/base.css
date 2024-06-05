@@ -88,7 +88,7 @@ button, a.button {
 }
 
 input[type=submit]:hover, button:hover, a.button:hover {
-    background:#432874;
+    background:#432874 !important;
 }
 
 button:active, a.button:active {
