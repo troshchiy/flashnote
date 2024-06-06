@@ -1,3 +1,7 @@
+* {
+    box-sizing:border-box;
+}
+
 body {
     margin:0;
     padding:0;
@@ -12,6 +16,11 @@ h1 {
 
 h2 {
     font-weight:bold;
+}
+
+img {
+    border:1px solid #6f42c1;
+    border-radius:5px;
 }
 
 #header {
@@ -49,7 +58,35 @@ h2 {
     margin-top:4px;
 }
 
+#welcome {
+    margin:auto;
+    width:35%;
+}
+
+#what-is-flashnote {
+    margin:auto;
+    width:90%;
+    padding-bottom:50px;
+}
+
 #article {
     margin:auto;
-    width:50%;
+    width:90%;
+    display:grid;
+    grid-template-columns:50% 50%;
+    grid-column-gap:20px;
+}
+
+.left {
+  grid-column-start:1;
+}
+
+.right {
+    grid-column-start:2;
+}
+
+.article:after {
+  content: "";
+  display: table;
+  clear: both;
 }

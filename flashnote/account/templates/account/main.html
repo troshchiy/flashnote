@@ -8,23 +8,55 @@
 </head>
 <body>
     <div id="header">
-        <div class="logo">Noteflash</div>
-        <a href="{% url 'register' %}" class="button">Get Noteflash free</a>
+        <div class="logo">Flashnote</div>
+        <a href="{% url 'register' %}" class="button">Get Flashnote free</a>
         <a href="{% url 'login' %}">Log in</a>
     </div>
-    <div id="article">
-        <h1>Welcome to Noteflash!</h1>
+    <h1 id="welcome">Welcome to Flashnote!</h1>
+    <div id="what-is-flashnote">
         <h2>What is Flashnote?</h2>
         <p>Flashnote is a note-taking app that makes it easy to convert your notes into spaced repetition flashcards.</p>
-        <h2>How it works?</h2>
-        <p>The work area is divided into two columns: the note-taking column (on the right) and the questions/keyword column (on the left).</p>
-        <p>Notes from a lecture or text are written in the note-taking column.</p>
-        <p>To make a flashcard for future reviews, relevant questions or keywords are written in the left-hand column.</p>
-        <p>Only you decide which note will be turned into a flashcard, and which will remain only in the notes.</p>
-        <h2>Spaced repetition learning</h2>
-        <p>Spaced repetition is a clever technique for remembering things long-term.
-            With Noteflash, you practice just before you're likely to forget, which strengthens your memory.
-            As you practice more, you'll find you can wait longer between study sessions until you remember the info forever!</p>
+    </div>
+    <div id="article">
+        <div class="left">
+            <h2>How it works?</h2>
+            <p>The work area is divided into two columns: the note-taking column (on the right) and the questions/keyword column (on the left).</p>
+            <p>Notes from a lecture or text are written in the note-taking column.</p>
+            <p>To make a flashcard for future reviews, relevant questions or keywords are written in the left-hand column.</p>
+            <p>Only you decide which note will be turned into a flashcard, and which will remain only in the notes.</p>
+        </div>
+        <div class="right">
+            <img src="{% static 'images/editor.png' %}" height="350" width="700">
+        </div>
+        <div class="left">
+            <img src="{% static 'images/learn.png' %}" height="230" width="680">
+        </div>
+        <div class="right">
+            <h2>Study when you need to</h2>
+            <p>
+                Flashnote making it easier to know how many cards you need to review at the moment.
+                We'll help you keep what you've learned fresh in your mind.
+            </p>
+        </div>
+        <div class="left">
+            <h2>Spaced repetition learning</h2>
+            <p>
+                Spaced repetition is a clever technique for remembering things long-term.
+                With Flashnote, you practice just before you're likely to forget, which strengthens your memory.
+                As you practice more, you'll find you can wait longer between study sessions until you remember the info forever!
+            </p>
+        </div>
+        <div class="right">
+            <img src="{% static 'images/flashcard-frontside.png' %}" height="310" width="680">
+        </div>
+        <div class="left">
+            <img src="{% static 'images/flashcard-backside.png' %}" height="480" width="680">
+        </div>
+        <div class="right">
+            <h2>Effective Study</h2>
+            <p>The more you practice recalling information from memory, the better you remember it later.
+                This explains why using flashcards or taking practice tests is more effective than simply reviewing your notes until they seem familiar.</p>
+        </div>
     </div>
 </body>
 </html>

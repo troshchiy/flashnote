@@ -1,8 +1,8 @@
-let noteForm = document.querySelectorAll(".note-form")
-let formNum = noteForm.length-1 //Get the number of the last form on the page with zero-based indexing
 let formRegex = RegExp(`form-(\\d){1}-`,'g') //Regex to find all instances of the form number
 
 function createForm() {
+    let noteForm = document.querySelectorAll(".note-form")
+    let formNum = noteForm.length-1 //Get the number of the last form on the page with zero-based indexing
     let newForm = noteForm[0].cloneNode(true) //Clone the note form
     let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
 
@@ -42,6 +42,7 @@ function keydown(){
 
             referenceNode = element.parentNode.parentNode
             referenceNode.parentNode.insertBefore(newForm, referenceNode.nextSibling);
+            let noteForm = document.querySelectorAll(".note-form")
 
             order = 1;
             noteForm.forEach((form) => {
