@@ -41,6 +41,7 @@ def _update_settings(source_folder, site_name):
     settings_path = source_folder + '/flashnote/flashnote/settings.py'
     sed(settings_path, 'DEBUG = True', 'DEBUG = False')
     sed(settings_path, 'ALLOWED_HOSTS = .+$', f'ALLOWED_HOSTS = ["{site_name}"]')
+    sed(settings_path, 'STATIC_ROOT = .+$', f'STATIC_ROOT = "/var/www/{site_name}/static"')
     secret_key_file = source_folder + '/flashnote/flashnote/secret_key.py'
     if not exists(secret_key_file):
         key = run(f'{source_folder}/../virtualenv/bin/python -c '
@@ -51,7 +52,6 @@ def _update_settings(source_folder, site_name):
 
 def _update_static_files(source_folder, site_name):
     run(f'cd {source_folder}/flashnote && ../../virtualenv/bin/python manage.py collectstatic --noinput')
-    run(f'sudo mv {source_folder}/../static /var/www/{site_name}')
 
 
 def _update_database(source_folder):
