@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Notebook, Page, Note
@@ -13,6 +13,7 @@ def notebooks_list(request):
             for form in notebooks_formset:
                 form.instance.author = request.user
             notebooks_formset.save()
+            return redirect('/editor/notebooks')
 
     notebooks = Notebook.objects.user(request.user).order_by('title')
     notebooks_formset = NotebookFormSet(queryset=notebooks)
@@ -33,6 +34,7 @@ def notebook_content(request, notebook_id):
             for form in pages_formset:
                 form.instance.notebook = notebook
             pages_formset.save()
+            return redirect(f'/editor/notebook/{notebook_id}')
 
     pages = Page.objects.filter(notebook=notebook)
     pages_formset = PageFormSet(queryset=pages)
@@ -55,6 +57,7 @@ def page_content(request, page_id):
                 note_form.instance.order = order
                 note_form.instance.save(update_fields=['order'])
             notes_formset.save()
+            return redirect(f'/editor/page/{page_id}')
 
     notes = Note.objects.filter(page=page)
     notes_formset = NoteFormSet(queryset=notes)
