@@ -1,5 +1,6 @@
 let form = document.querySelectorAll(".form")
 let container = document.querySelector("#container")
+let formContainer = document.querySelector("#form-container")
 let addButton = document.querySelector("#new-btn")
 let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
 
@@ -21,7 +22,7 @@ function addForm(e){
     outerLink.outerHTML = outerLink.innerHTML;
     newForm.querySelector("input").value = "Untitled";
     newForm.querySelector("input").style.cursor = "text";
-    createConfirmInput(newForm.querySelector(".title"));
+    createConfirmInput();
     container.appendChild(newForm) //Insert the new form at the end of the list of forms
     newForm.querySelector("input").focus();
     newForm.querySelector("input").select();
@@ -29,13 +30,13 @@ function addForm(e){
     totalForms.setAttribute('value', `${formNum+1}`) //Increment the number of total forms in the form management
 }
 
-function createConfirmInput(node) {
+function createConfirmInput() {
     const confirmInput = document.createElement('input');
     confirmInput.value = 'Confirm';
     confirmInput.type = 'submit';
     confirmInput.form = "form-container";
     confirmInput.setAttribute("class", "confirm-button");
-    node.appendChild(confirmInput);
+    formContainer.appendChild(confirmInput);
 }
 
 function renameRowForm(form) {

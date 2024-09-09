@@ -47,7 +47,7 @@ def _update_settings(source_folder, site_name):
         key = run(f'{source_folder}/../virtualenv/bin/python -c '
                   '"from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"')
         append(secret_key_file, f'SECRET_KEY = "{key}"')
-    append(settings_path, '\nfrom .secret_key import SECRET_KEY')
+    append(settings_path, 'from .secret_key import SECRET_KEY')
 
 
 def _update_static_files(source_folder, site_name):
