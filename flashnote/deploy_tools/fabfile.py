@@ -56,4 +56,4 @@ def _update_static_files(source_folder, site_name):
 
 def _update_database(source_folder):
     if exists(source_folder + '/.env'):
-        run(f'cd {source_folder} && ../virtualenv/bin/python manage.py migrate --noinput')
+        run(f'cd {source_folder}/flashnote && ../../virtualenv/bin/python manage.py migrate --noinput')

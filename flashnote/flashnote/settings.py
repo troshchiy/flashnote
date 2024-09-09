@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'flashnote.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'flashnote',
+        'NAME': str(os.getenv('POSTGRESQL_DATABASE')),
         'USER': str(os.getenv('POSTGRESQL_USER')),
         'PASSWORD': str(os.getenv('POSTGRESQL_PASSWORD')),
         'HOST': 'localhost',
@@ -125,7 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '../static'))
+STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '../../static'))
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
